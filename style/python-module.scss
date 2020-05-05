@@ -1,0 +1,283 @@
+html{
+  font-size: 14px;
+}
+body {
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 50%, rgba(255,255,255,1) 100%);
+  counter-reset: cours-counter;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+  }
+
+  .h3,
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  p.discours {
+    text-indent: 0.75rem;
+
+  }
+
+  div.discours{
+    @media (min-width: 992px) {
+      column-count: 2;
+      column-gap: 2rem;
+      column-rule: #555;
+      column-rule-width: 1px;
+      column-rule-style: solid;
+    }
+  }
+
+  header {
+    border-bottom: 1px solid #555;
+
+    .main-title {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-size: 2.25rem;
+    }
+  }
+
+  div.cours,div.attention,div.retenir,div.consigne{
+    padding: 5px 15px; 
+    border-top:1px solid rgb(194, 195, 212);
+    border-bottom:1px solid rgb(194, 195, 212);
+  }
+
+  div.cours {
+    background-color: rgba(255, 255, 255, 0.945);
+    >h4::before{
+      content: counter(cours-counter)"." ;
+      counter-increment: cours-counter;
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-size: 1.8rem;
+      font-weight: lighter;
+      margin-right: 0.2rem;
+    }
+  }
+
+  div.attention{
+    background-color: #ffc5c5;
+    h5{
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom:1px solid black;
+    }
+  }
+
+  div.retenir{   
+    background-color: #b6f0c7;
+    h5{
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom:1px solid black;
+    }
+  }
+
+  div.consigne{
+    pre {
+      margin-bottom: 0;
+    }
+
+    h5{
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom:1px solid black;
+    }
+
+    font-size: 16px;
+    color: #333;
+    background: rgba(255, 255, 200, 0.75);
+    padding: 0 15px;
+    padding-top: 5px;
+    //box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+
+
+
+    h4 {
+      font-size: 1.5em;
+      margin: 5px 0 5px 0;
+    }
+
+
+
+    h6 {
+      font-size: 1em;
+      font-weight: bold;
+      margin: 20px 0 5px 0;
+    }
+
+    /* Steps list */
+
+    ol.steps {
+      list-style-type: none;
+      counter-reset: step-counter;
+      padding-left: 60px;
+      margin: 0.5rem 0 0 0;
+
+
+      li {
+        position: relative;
+        margin: 0 0 8px 0;
+        min-height: 50px;
+
+        h6 {
+          font-size: 1.5em;
+          font-weight: normal;
+          color: rgba(0, 0, 0, .6);
+        }
+
+
+        p {
+          line-height: 140%;
+        }
+      }
+
+      li:before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: -60px;
+        top: -0.3rem;
+        font-size: 16px;
+        border: solid 2px rgba(0, 0, 0, .4);
+        border-radius: 50%;
+        padding: 4px 10px;
+        opacity: .5;
+
+      }
+
+
+      a {
+        color: #357548;
+      }
+
+      a:hover {
+        color: #246036;
+      }
+
+      p,
+      li {
+        color: rgba(0, 0, 0, .6);
+      }
+
+      p {
+        line-height: 125%;
+      }
+
+      .tip {
+        background: rgba(0, 0, 0, .1);
+        padding: 10px 14px;
+        border-radius: 2px;
+      }
+
+      hr {
+        border: none;
+        border-bottom: solid 2px #C9B45B;
+        margin: 25px 0;
+      }
+
+      p,
+      ol,
+      ul {
+        margin: 10px 0 20px 0;
+      }
+
+      li {
+        margin: 0 0 10px 0;
+      }
+
+      img {
+        display: block;
+        margin: 5px 0 10px;
+        border: solid 5px white;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, .2);
+      }
+    }
+  }
+}
+
+
+
+bloc-python {
+
+  div[role='consignes'] {
+    pre {
+      margin-bottom: 0;
+    }
+  }
+
+  h3 {
+    margin-top: 0.4rem;
+    border-bottom: 1px solid #555;
+  }
+
+  div.graphic {
+    margin: auto;
+    padding: 0.5rem;
+
+    canvas {
+      margin: auto;
+      background-color: white;
+    }
+
+  }
+
+
+  div.graphic canvas:first-child {
+    background: none;
+  }
+
+  div[role='result'] {
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 30rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #AAA;
+    color: #252;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  div[role='graphic'] {
+    border-radius: 10px;
+    padding: 10px;
+    min-height: 30rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #EEE;
+  }
+
+  div[role='editor'] {
+    margin-top: 0.3rem;
+    min-height: 27.5rem;
+  }
+
+  div.actions {
+    text-align: right;
+
+    button {
+      margin-bottom: 0.3rem;
+      font-size: smaller;
+    }
+  }
+
+  canvas {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    margin: auto;
+  }
+}

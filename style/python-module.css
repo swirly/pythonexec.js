@@ -1,0 +1,185 @@
+html {
+  font-size: 14px; }
+
+body {
+  background: white;
+  background: linear-gradient(90deg, white 0%, #e4e4e4 50%, white 100%);
+  counter-reset: cours-counter; }
+  body h1,
+  body h2,
+  body h3,
+  body h4,
+  body h5,
+  body h6 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif; }
+  body .h3,
+  body h3 {
+    font-size: 1.75rem; }
+  body p {
+    text-align: justify; }
+  body p.discours {
+    text-indent: 0.75rem; }
+  @media (min-width: 992px) {
+    body div.discours {
+      column-count: 2;
+      column-gap: 2rem;
+      column-rule: #555;
+      column-rule-width: 1px;
+      column-rule-style: solid; } }
+  body header {
+    border-bottom: 1px solid #555; }
+    body header .main-title {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-size: 2.25rem; }
+  body div.cours, body div.attention, body div.retenir, body div.consigne {
+    padding: 5px 15px;
+    border-top: 1px solid #c2c3d4;
+    border-bottom: 1px solid #c2c3d4; }
+  body div.cours {
+    background-color: rgba(255, 255, 255, 0.945); }
+    body div.cours > h4::before {
+      content: counter(cours-counter) ".";
+      counter-increment: cours-counter;
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-size: 1.8rem;
+      font-weight: lighter;
+      margin-right: 0.2rem; }
+  body div.attention {
+    background-color: #ffc5c5; }
+    body div.attention h5 {
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid black; }
+  body div.retenir {
+    background-color: #b6f0c7; }
+    body div.retenir h5 {
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid black; }
+  body div.consigne {
+    font-size: 16px;
+    color: #333;
+    background: rgba(255, 255, 200, 0.75);
+    padding: 0 15px;
+    padding-top: 5px;
+    /* Steps list */ }
+    body div.consigne pre {
+      margin-bottom: 0; }
+    body div.consigne h5 {
+      font-style: italic;
+      text-align: right;
+      padding-right: 2em;
+      padding-bottom: 0.3em;
+      border-bottom: 1px solid black; }
+    body div.consigne h4 {
+      font-size: 1.5em;
+      margin: 5px 0 5px 0; }
+    body div.consigne h6 {
+      font-size: 1em;
+      font-weight: bold;
+      margin: 20px 0 5px 0; }
+    body div.consigne ol.steps {
+      list-style-type: none;
+      counter-reset: step-counter;
+      padding-left: 60px;
+      margin: 0.5rem 0 0 0; }
+      body div.consigne ol.steps li {
+        position: relative;
+        margin: 0 0 8px 0;
+        min-height: 50px; }
+        body div.consigne ol.steps li h6 {
+          font-size: 1.5em;
+          font-weight: normal;
+          color: rgba(0, 0, 0, 0.6); }
+        body div.consigne ol.steps li p {
+          line-height: 140%; }
+      body div.consigne ol.steps li:before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: -60px;
+        top: -0.3rem;
+        font-size: 16px;
+        border: solid 2px rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+        padding: 4px 10px;
+        opacity: .5; }
+      body div.consigne ol.steps a {
+        color: #357548; }
+      body div.consigne ol.steps a:hover {
+        color: #246036; }
+      body div.consigne ol.steps p,
+      body div.consigne ol.steps li {
+        color: rgba(0, 0, 0, 0.6); }
+      body div.consigne ol.steps p {
+        line-height: 125%; }
+      body div.consigne ol.steps .tip {
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px 14px;
+        border-radius: 2px; }
+      body div.consigne ol.steps hr {
+        border: none;
+        border-bottom: solid 2px #C9B45B;
+        margin: 25px 0; }
+      body div.consigne ol.steps p,
+      body div.consigne ol.steps ol,
+      body div.consigne ol.steps ul {
+        margin: 10px 0 20px 0; }
+      body div.consigne ol.steps li {
+        margin: 0 0 10px 0; }
+      body div.consigne ol.steps img {
+        display: block;
+        margin: 5px 0 10px;
+        border: solid 5px white;
+        box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2); }
+
+bloc-python div[role='consignes'] pre {
+  margin-bottom: 0; }
+
+bloc-python h3 {
+  margin-top: 0.4rem;
+  border-bottom: 1px solid #555; }
+
+bloc-python div.graphic {
+  margin: auto;
+  padding: 0.5rem; }
+  bloc-python div.graphic canvas {
+    margin: auto;
+    background-color: white; }
+
+bloc-python div.graphic canvas:first-child {
+  background: none; }
+
+bloc-python div[role='result'] {
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 30rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: #AAA;
+  color: #252;
+  font-family: 'Courier New', Courier, monospace; }
+
+bloc-python div[role='graphic'] {
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 30rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: #EEE; }
+
+bloc-python div[role='editor'] {
+  margin-top: 0.3rem;
+  min-height: 27.5rem; }
+
+bloc-python div.actions {
+  text-align: right; }
+  bloc-python div.actions button {
+    margin-bottom: 0.3rem;
+    font-size: smaller; }
+
+bloc-python canvas {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  margin: auto; }

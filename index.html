@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test de Python dans le navigateur</title>
+    <meta name=author" content="Laurent COOPER">
+    <meta name="description" content="Une démonstration de l'utilisation de pythonexec, basé sur skulpt">
+    <meta name="keywords" content="Skulpt, Python, Javascript, Browser">
+    <link href="style/favicon.ico" rel="icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css"
+        integrity="sha256-/d3ZZC6Gr1V8JDi9Os6A2CjemarhIv16pw1Q6snL+lM=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style/python-module.css">
+    <link rel="import" href="templates/blocs.html">
+
+
+</head>
+
+<body style="background-image: url('style/back.png')">
+    <div class="container">
+        <header class="py-3 mb-1">
+            <div class="row">
+                <div class="col-12 main-title"> Python par la pratique </div>
+            </div>
+        </header>
+        <div class="jumbotron p-3">
+            <div class="col-12">
+                <h1> Démonstrateur de pythonexec</h1>
+                <div class="discours">
+                    <p class="discours my-2">
+                        Voici un démonstrateur de pythonexec, un petit outil en javascript basé sur les technologies
+                        existantes pour
+                        éxécuter Python dans le navigateur à partir de transpilage. Le code python est transformé en
+                        Javascript grâce
+                        la libraire Skulpt. Il est ensuite interprété par le navigateur.
+                        <p class="discours mb-0">
+                            L'ensemble est très léger. Une fois les quelques bibliothèques chargées, tout se passe dans
+                            le navigateur.
+                            Il n'y a donc pas de serveur à gérer, de charge serveur à anticiper.
+                        </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <main class="container mb-5" role="main">
+        <bloc-cours>
+            <h4>Les blocs html </h4>
+            <p> On peut utiliser des blocs prédéfinis qui enrichissent les balises html usuelles pour aller plus
+                vite. Ici, nous sommes
+                par exemple dans un bloc-cours qui s'utilise comme suit :</p>
+            <pre><code class="html">&lt;bloc-cours&gt; bloc de cours &lt;/bloc-cours&gt;</code></pre>
+            <p>Bien entendu, comme la bibliothèque highlight.js est disponible, on peut intégrer du code comme dans la
+                ligne ci dessous</p>
+            <pre><code class="python">print("Hello world");</code></pre>
+            <h4>Signaler un danger </h4>
+            <p>Un autre type de bloc est le bloc bloc-attention pour signaler un danger</p>
+            <bloc-attention>
+                <p>
+                    Ne pas oublier les parenthèses autour de la chaîne de caractère.
+                </p>
+            </bloc-attention>
+            <h4>Donner des consignes</h4>
+            <p>Le bloc consigne permet aussi de donner des consignes. On le placera juste avant le bloc-python qui
+                contient l'éditeur</p>
+            <bloc-consigne>
+                <ol class="steps">
+                    <li>Ajouter au code suivant une ligne avec
+                        <pre><code class="python">print("Hello world");</code></pre>
+                    </li>
+                    <li> Éxécuter le code</li>
+                </ol>
+            </bloc-consigne>
+        </bloc-cours>
+        <bloc-cours>
+            <h4>Python</h4>
+            <p>Le bloc python contient les boutons usuels :</p>
+            <ul>
+                <li>Le bouton pour éxécuter le code</li>
+                <li>Un bouton pour recharger le code par défaut</li>
+                <li>Un bouton pour sauvegarder et un pour restaurer le code</li>
+                <li>Un dernier bouton pour le télécharger (pour éviter des copier/coller)</li>
+            </ul>
+            <p> Et il contient aussi une sortie pour la console et pour les graphismes.</p>
+        </bloc-cours>
+        <bloc-python data-python="python/bonjour.py">
+        </bloc-python>
+        <bloc-cours>
+            <h4>Faire le résumé </h4>
+            <p> Et enfin, il y a les bloc-retenir pour ce qui est à retenir.</p>
+            <bloc-retenir>
+                <p>Il y a 5 types de blocs</p>
+                <ol>
+                    <li>bloc-cours</li>
+                    <li>bloc-attention</li>
+                    <li>bloc-consigne</li>
+                    <li>bloc-python</li>
+                    <li>bloc-retenir</li>
+                </ol>
+            </bloc-retenir>
+        </bloc-cours>
+        <bloc-cours>
+            <h4>Calcul</h4>
+            <p>Comme on peut s'y attendre, les blocs pythons permettent de faire du calcul</p>
+        </bloc-cours>
+        <bloc-python data-python="python/calcul1.py">
+        </bloc-python>
+        <bloc-cours>
+            <h4> Et du graphisme</h4>
+            <p>Mais on peut aussi faire des graphismes avec le module turtle (et ça, c'est cool).</p>
+        </bloc-cours>
+        <bloc-python data-python="python/turtle1.py">
+        </bloc-python>
+        
+    </main>
+</body>
+<!-- Font awesome-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+<!-- Bootstrap javascript -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<!-- Ace code editor -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
+    integrity="sha256-C7DTYRJLG+B/VEzHGeoPMw699nsTQYPAXHKXZb+q04E=" crossorigin="anonymous"></script>
+<!-- Skulpt library for Python transpiling. No CDN yet-->
+<script src="https://skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
+<script src="https://skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
+<!-- Highlight JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"
+    integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"
+    integrity="sha256-HJNvOT759hq/HSbKUh+somD1QKrzFt94rkbwiQPR8Z0=" crossorigin="anonymous"></script>
+<!-- Python module script -->
+<script src="js/pythonexec.js"></script>
+<!-- FileSaver Library to be able to save code-->
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"
+    integrity="sha256-u/J1Urdrk3nCYFefpoeTMgI5viU1ujCDu2fXXoSJjhg=" crossorigin="anonymous"></script>
+
+</html>
