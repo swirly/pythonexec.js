@@ -5,12 +5,31 @@ class PythonModule extends HTMLElement {
     let myTemplate = document.getElementById('mon-python');
     this.appendChild(myTemplate.content.cloneNode(true));
 
+    function dec2hex (dec) {
+      return ('0' + dec.toString(16)).substr(-2)
+    }
+    
+    // generateId :: Integer -> String
+    function generateId (len) {
+      var arr = new Uint8Array((len || 40) / 2)
+      window.crypto.getRandomValues(arr)
+      return Array.from(arr, dec2hex).join('')
+    }
+
+    if (this.id==""||this.id==null){
+      this.id=generateId(16);
+    }
+
     /* Divisions */
     this.tododiv = this.querySelector('[role="consignes"]');
     this.acediv = this.querySelector('[role="editor"]');
     this.pythondiv = this.querySelector('[role="result"]');
     this.pythonoutput = this.querySelector('[role="output"');
+    console.log(this.pythonoutput);
+    this.pythonoutput.id=this.id+"Console";
+    console.log(this.pythonoutput.id);
     this.graphicdiv = this.querySelector('[role="graphic"]');
+    this.graphicdiv.id = this.id+"Graphic";
     /* Editor buttons */
     this.downloadButton = this.querySelector('[role="download"]');
     this.restoreButton = this.querySelector('[role="restore"]');
@@ -85,7 +104,7 @@ class PythonModule extends HTMLElement {
         (function (elt, prog, mypre) {
           mypre.innerHTML = '';
           Sk.pre = "output";
-          Sk.canvas = "graphic";
+          Sk.canvas = elt.graphicdiv.id;
           Sk.python3 = true;
           var SkFuture = {
             print_function: true, division: true, absolute_import: null, unicode_literals: true,
