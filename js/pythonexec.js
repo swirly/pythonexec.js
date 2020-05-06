@@ -85,10 +85,51 @@ class PythonModule extends HTMLElement {
         (function (elt, prog, mypre) {
           mypre.innerHTML = '';
           Sk.pre = "output";
+          Sk.canvas = "graphic";
+          Sk.python3 = true;
+          var SkFuture = {
+            print_function: true, division: true, absolute_import: null, unicode_literals: true,
+            // skulpt specific
+            set_repr: false, class_repr: false, inherit_from_object: false, super_args: false,
+            // skulpt 1.11.32 specific
+            octal_number_literal: true,bankers_rounding: true, python_version: true,
+            dunder_next : true,dunder_round: true,exceptions: true, no_long_type: false,
+            ceil_floor_int: true,
+          };
+          Sk.externalLibraries = {
+            numpy: {
+              path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/__init__.js',
+              dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/math.js']
+            },
+            "numpy.random": {
+              path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/numpy/random/__init__.js'
+            },
+            matplotlib: {
+              path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/__init__.js'
+            },
+            "matplotlib.pyplot": {
+              path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/matplotlib/pyplot/__init__.js',
+              dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/d3.min.js']
+            },
+            pygal: {
+              path: 'https://cdn.jsdelivr.net/gh/trinketapp/pygal.js@0.1.4/__init__.js',
+              dependencies: ['https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts.js',
+                'https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts-more.js']
+            },
+            processing: {
+              path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/processing/__init__.js',
+              dependencies: ['https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/deps/processing.js']
+            }
+          };
+
           Sk.configure({
             output: pythonout(elt),
             read: builtinRead,
-            __future__: Sk.python3
+            __future__:SkFuture, 
+            killableWhile:true, 
+            killableFor:true,
+            //inputfun : null , // fonction d'entrée personnalisée, voir https://github.com/skulpt/skulpt/issues/685
+            //inputfunTakesPrompt:true
           });
           (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = elt.graphicdiv;
           var myPromise = Sk.misceval.asyncToPromise(function () {
@@ -137,7 +178,7 @@ class PythonModule extends HTMLElement {
     function myDownload(elt) {
       return function () {
         (function (elt) {
-          var blob = new Blob([elt.editor.getValue()],{type:"text/x-python;charset=utf-8"});
+          var blob = new Blob([elt.editor.getValue()], { type: "text/x-python;charset=utf-8" });
           saveAs(blob, "programme.py");
         }(elt));
       };
