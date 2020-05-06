@@ -169,6 +169,9 @@ bloc-python div[role='graphic'] {
   min-height: 30rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   background-color: #EEE; }
+  bloc-python div[role='graphic'] svg {
+    padding: 0 !important;
+    transform: scale(0.9); }
 
 bloc-python div[role='editor'] {
   margin-top: 0.3rem;

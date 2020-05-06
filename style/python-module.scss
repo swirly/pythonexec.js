@@ -260,6 +260,12 @@ bloc-python {
     min-height: 30rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     background-color: #EEE;
+
+    svg {
+      padding:0 !important;
+      transform:scale(0.9);
+    }
+
   }
 
   div[role='editor'] {
