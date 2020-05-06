@@ -156,6 +156,7 @@ class PythonModule extends HTMLElement {
           });
           myPromise.then(function (mod) {
             console.log('Python évalué avec succés');
+            elt.graphicdiv.style=""; //pyplot block style incompatible with bootstrap tabs
           },
             function (err) {
               console.log(err.toString());
