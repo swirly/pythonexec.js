@@ -76,7 +76,17 @@
                     <li> Éxécuter le code</li>
                 </ol>
             </bloc-consigne>
+
+            <p> Tous les blocs peuvent contenir des éléments, ou bien ils peuvent importer les élèments à partir
+                d'un fichier en utilisant l'attribut <b>data-file</b>
+            </p>
+
+            <bloc-consigne data-file="assets/consigne-01.html">
+            </bloc-consigne>
+
         </bloc-cours>
+
+
         <bloc-cours>
             <h4>Python</h4>
             <p>Le bloc python contient les boutons usuels :</p>
@@ -87,9 +97,12 @@
                 <li>Un dernier bouton pour le télécharger (pour éviter des copier/coller)</li>
             </ul>
             <p> Et il contient aussi une sortie pour la console et pour les graphismes.</p>
-        </bloc-cours>
-        <bloc-python data-python="python/bonjour.py">
+  
+        <bloc-python >
+# Les lignes qui commencent par # sont des commentaires
+# Mettez ci dessous votre code              
         </bloc-python>
+    </bloc-cours>
         <bloc-cours>
             <h4>Faire le résumé </h4>
             <p> Et enfin, il y a les bloc-retenir pour ce qui est à retenir.</p>

@@ -1,23 +1,103 @@
+class blockModule extends HTMLElement {
+  constructor(block_type, titre = null) {
+    super();
+    let template = document.getElementById('mes-blocs');
+    this.initial_content = this.innerHTML;
+    this.innerHTML = '';
+    this.appendChild(template.content.cloneNode(true));
+    this.querySelector('.inside').classList.add(block_type);
+    this.titre = titre;
+    this.loadData();
+  }
+
+  loadData() {
+    const contenu = this.getAttribute('data-file');
+    if (contenu != "" && contenu != null) {
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = (function (elt, xhr) {
+        return function (contenu) {
+          var DONE = 4; // readyState 4 means the request is done.
+          var OK = 200; // status 200 is a successful return.
+          if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+              elt.querySelector('.inside').innerHTML = xhr.responseText;
+              if (elt.titre != null) {
+                elt.querySelector('.inside').prepend(elt.titre);
+              }
+              var event = new CustomEvent('bloc-loaded');
+              document.dispatchEvent(event);
+            }
+          }
+        };
+      }(this, httpRequest));
+      httpRequest.open("GET", contenu);
+      httpRequest.send();
+    } else {
+      this.querySelector('.inside').innerHTML = this.initial_content;
+      if (this.titre != null) {
+        this.querySelector('.inside').prepend(this.titre);
+      }
+    }
+  }
+}
+
+/* Classe pour les cours */
+class Cours extends blockModule {
+  constructor() {
+    super('cours');
+  }
+}
+
+/* Elements custom */
+class Attention extends blockModule {
+  constructor() {
+    let titre = document.createElement('h5');
+    titre.innerHTML = '<i class="fas fa-bomb"></i> Attention !';
+    super('attention', titre);
+  }
+}
+
+/* Elements custom */
+class Retenir extends blockModule {
+  constructor() {
+    let titre = document.createElement('h5');
+    titre.innerHTML = '<i class="fas fa-brain"></i> À retenir.';
+    super('retenir', titre);
+  }
+}
+
+/* Elements custom */
+class Consigne extends blockModule {
+  constructor() {
+    let titre = document.createElement('h5');
+    titre.innerHTML = '<i class="fas fa-cogs"></i> À faire.';
+    super('consigne', titre);
+  }
+}
+
 class PythonModule extends HTMLElement {
   constructor() {
     super();
+    //preserve inner content
+    this.datas = {};
+    this.datas.initialPython = this.innerHTML.trim();
     // clone template
     let myTemplate = document.getElementById('mon-python');
     this.appendChild(myTemplate.content.cloneNode(true));
 
-    function dec2hex (dec) {
-      return ('0' + dec.toString(16)).substr(-2)
-    }
-    
-    // generateId :: Integer -> String
-    function generateId (len) {
-      var arr = new Uint8Array((len || 40) / 2)
-      window.crypto.getRandomValues(arr)
-      return Array.from(arr, dec2hex).join('')
+    function dec2hex(dec) {
+      return ('0' + dec.toString(16)).substr(-2);
     }
 
-    if (this.id==""||this.id==null){
-      this.id=generateId(16);
+    // generateId :: Integer -> String
+    function generateId(len) {
+      var arr = new Uint8Array((len || 40) / 2);
+      window.crypto.getRandomValues(arr);
+      return Array.from(arr, dec2hex).join('');
+    }
+
+    if (this.id == "" || this.id == null) {
+      this.id = generateId(16);
     }
 
     /* Divisions */
@@ -26,10 +106,10 @@ class PythonModule extends HTMLElement {
     this.pythondiv = this.querySelector('[role="result"]');
     this.pythonoutput = this.querySelector('[role="output"');
     console.log(this.pythonoutput);
-    this.pythonoutput.id=this.id+"Console";
+    this.pythonoutput.id = this.id + "Console";
     console.log(this.pythonoutput.id);
     this.graphicdiv = this.querySelector('[role="graphic"]');
-    this.graphicdiv.id = this.id+"Graphic";
+    this.graphicdiv.id = this.id + "Graphic";
     /* Editor buttons */
     this.downloadButton = this.querySelector('[role="download"]');
     this.restoreButton = this.querySelector('[role="restore"]');
@@ -39,7 +119,7 @@ class PythonModule extends HTMLElement {
     /* Tab buttons */
     this.consoleTab = this.querySelector('[aria-controls="console"]');
     this.graphicTab = this.querySelector('[aria-controls="graphic"]');
-    this.datas = {};
+
 
 
     this.consoleTab.addEventListener('click', (function (elt) {
@@ -62,28 +142,6 @@ class PythonModule extends HTMLElement {
         e.preventDefault();
       };
     })(this));
-
-    // Load Python 
-    function loadPython(elt) {
-      const python = elt.getAttribute('data-python');
-      if (python != "") {
-        var httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = (function (elt, xhr) {
-          return function (data) {
-            var DONE = 4; // readyState 4 means the request is done.
-            var OK = 200; // status 200 is a successful return.
-            if (xhr.readyState === DONE) {
-              if (xhr.status === OK) {
-                elt.datas.initialPython = xhr.responseText;
-                elt.editor.setValue(elt.datas.initialPython);
-              }
-            }
-          };
-        }(elt, httpRequest));
-        httpRequest.open("GET", python);
-        httpRequest.send();
-      }
-    }
 
     function pythonout(elt) {
       return function (txt) {
@@ -111,8 +169,8 @@ class PythonModule extends HTMLElement {
             // skulpt specific
             set_repr: false, class_repr: false, inherit_from_object: false, super_args: false,
             // skulpt 1.11.32 specific
-            octal_number_literal: true,bankers_rounding: true, python_version: true,
-            dunder_next : true,dunder_round: true,exceptions: true, no_long_type: false,
+            octal_number_literal: true, bankers_rounding: true, python_version: true,
+            dunder_next: true, dunder_round: true, exceptions: true, no_long_type: false,
             ceil_floor_int: true,
           };
           Sk.externalLibraries = {
@@ -144,9 +202,9 @@ class PythonModule extends HTMLElement {
           Sk.configure({
             output: pythonout(elt),
             read: builtinRead,
-            __future__:SkFuture, 
-            killableWhile:true, 
-            killableFor:true,
+            __future__: SkFuture,
+            killableWhile: true,
+            killableFor: true,
             //inputfun : null , // fonction d'entrée personnalisée, voir https://github.com/skulpt/skulpt/issues/685
             //inputfunTakesPrompt:true
           });
@@ -156,7 +214,7 @@ class PythonModule extends HTMLElement {
           });
           myPromise.then(function (mod) {
             console.log('Python évalué avec succés');
-            elt.graphicdiv.style=""; //pyplot block style incompatible with bootstrap tabs
+            elt.graphicdiv.style = ""; //pyplot block style incompatible with bootstrap tabs
           },
             function (err) {
               console.log(err.toString());
@@ -168,14 +226,14 @@ class PythonModule extends HTMLElement {
       };
     }
 
-    function mySave(elt) {
+    function mySave(e) {
       return function () {
         (function (elt) {
           if (elt.restoreButton.classList.contains('disabled')) {
             elt.restoreButton.classList.remove('disabled');
           }
           elt.datas.savedPython = elt.editor.getValue();
-        }(elt));
+        }(e));
       };
     }
 
@@ -214,109 +272,36 @@ class PythonModule extends HTMLElement {
     this.reloadButton.onclick = myReload(this);
     this.downloadButton.onclick = myDownload(this);
 
-    loadPython(this);
+    this.loadPython();
   }
 
-}
-
-/* Classe pour les cours */
-class Cours extends HTMLElement {
-  constructor() {
-    super();
-    let template = document.getElementById('mes-blocs');
-    console.log(template);
-    let text = this.innerHTML;
-    this.innerHTML = '';
-    this.appendChild(template.content.cloneNode(true));
-    this.querySelector('.inside').classList.add('cours');
-    this.querySelector('.inside').innerHTML = text;
-  }
-}
-
-/* Elements custom */
-class Attention extends HTMLElement {
-  constructor() {
-    super();
-    let template = document.getElementById('mes-blocs');
-    console.log(template);
-    let text = this.innerHTML;
-    this.innerHTML = '';
-    this.appendChild(template.content.cloneNode(true));
-    this.querySelector('.inside').classList.add('attention');
-    this.querySelector('.inside').innerHTML = text;
-    let titre = document.createElement('h5');
-    titre.innerHTML = '<i class="fas fa-bomb"></i> Attention !';
-    this.querySelector('.inside').prepend(titre);
-  }
-}
-
-/* Elements custom */
-class Retenir extends HTMLElement {
-  constructor() {
-    super();
-    let template = document.getElementById('mes-blocs');
-    console.log(template);
-    let text = this.innerHTML;
-    this.innerHTML = '';
-    this.appendChild(template.content.cloneNode(true));
-    this.querySelector('.inside').classList.add('retenir');
-    this.querySelector('.inside').innerHTML = text;
-    let titre = document.createElement('h5');
-    titre.innerHTML = '<i class="fas fa-brain"></i> À retenir.';
-    this.querySelector('.inside').prepend(titre);
-  }
-}
-
-/* Elements custom */
-class Consigne extends HTMLElement {
-  constructor() {
-    super();
-
-    function loadData(elt) {
-      const todo = elt.getAttribute('data');
-      console.log(todo);
-      if (todo != "" && todo != null) {
-        var httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = (function (elt, xhr) {
-          return function (data) {
-            var DONE = 4; // readyState 4 means the request is done.
-            var OK = 200; // status 200 is a successful return.
-            if (xhr.readyState === DONE) {
-              if (xhr.status === OK) {
-                elt.querySelector('.inside').innerHTML = xhr.responseText;
-                var event = new CustomEvent('bloc-python-loaded');
-                document.dispatchEvent(event);
-                elt.querySelector('.inside').prepend(elt.titre);
-              }
+  // Load Python 
+  loadPython() {
+    const python = this.getAttribute('data-python');
+    if (python != "" && python != null) {
+      var httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = (function (elt, xhr) {
+        return function (data) {
+          var DONE = 4; // readyState 4 means the request is done.
+          var OK = 200; // status 200 is a successful return.
+          if (xhr.readyState === DONE) {
+            if (xhr.status === OK) {
+              elt.datas.initialPython = xhr.responseText;
+              elt.editor.setValue(elt.datas.initialPython);
             }
-          };
-        }(elt, httpRequest));
-        httpRequest.open("GET", todo);
-        httpRequest.send();
-      } else {
-        elt.querySelector('.inside').innerHTML = elt.text;
-        elt.querySelector('.inside').prepend(elt.titre);
-      }
+          }
+        };
+      }(this, httpRequest));
+      httpRequest.open("GET", python);
+      httpRequest.send();
+    } else {
+      this.editor.setValue(this.datas.initialPython)
     }
-
-    let template = document.getElementById('mes-blocs');
-    console.log(template);
-    this.text = this.innerHTML;
-    this.titre = document.createElement('h5');
-    this.titre.innerHTML = '<i class="fas fa-cogs"></i> À faire.';
-
-
-    this.innerHTML = '';
-    this.appendChild(template.content.cloneNode(true));
-    this.querySelector('.inside').classList.add('consigne');
-
-    loadData(this);
-
-
   }
+
 }
 
-/* Chargement du template pour le module Python */
+/* Chargement des templates */
 var httpRequest = new XMLHttpRequest();
 httpRequest.onreadystatechange = (function (xhr) {
   return function (data) {
@@ -338,17 +323,15 @@ httpRequest.send();
 
 /* Création du contenu des modules Python */
 document.addEventListener('templateLoaded', function (e) {
-  customElements.define('bloc-python', PythonModule);
+
   customElements.define('bloc-cours', Cours);
   customElements.define('bloc-attention', Attention);
   customElements.define('bloc-retenir', Retenir);
   customElements.define('bloc-consigne', Consigne);
-  document.querySelectorAll('pre code').forEach((block) => {
-    hljs.highlightBlock(block);
-  });
+  customElements.define('bloc-python', PythonModule);
 });
 
-document.addEventListener('bloc-python-loaded', function (e) {
+document.addEventListener('bloc-loaded', function (e) {
   document.querySelectorAll('pre code').forEach((block) => {
     hljs.highlightBlock(block);
   });
