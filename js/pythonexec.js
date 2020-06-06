@@ -25,7 +25,7 @@ class blockModule extends HTMLElement {
                 elt.querySelector('.inside').prepend(elt.titre);
               }
               var event = new CustomEvent('bloc-loaded');
-              document.dispatchEvent(event);
+              elt.dispatchEvent(event);
             }
           }
         };
@@ -75,12 +75,30 @@ class Consigne extends blockModule {
   }
 }
 
+class MarkdownBlock extends blockModule {
+  constructor() {
+    super('markdown');
+    this.addEventListener(('bloc-loaded'), function (e) {
+      this.querySelectorAll('.markdown').forEach((block) => {
+        console.log('bloc markdown trouvé');
+        var converter = new showdown.Converter(),
+        html = converter.makeHtml(block.innerHTML);
+        block.innerHTML = html;
+      });
+    });
+    var event = new CustomEvent('bloc-loaded');
+    this.dispatchEvent(event);
+  }
+}
+
 class PythonModule extends HTMLElement {
   constructor() {
     super();
     //preserve inner content
     this.datas = {};
     this.datas.initialPython = this.innerHTML.trim();
+    // Empty content
+    this.innerHTML = '';
     // clone template
     let myTemplate = document.getElementById('mon-python');
     this.appendChild(myTemplate.content.cloneNode(true));
@@ -328,6 +346,7 @@ document.addEventListener('templateLoaded', function (e) {
   customElements.define('bloc-attention', Attention);
   customElements.define('bloc-retenir', Retenir);
   customElements.define('bloc-consigne', Consigne);
+  customElements.define('bloc-markdown', MarkdownBlock);
   customElements.define('bloc-python', PythonModule);
 });
 

@@ -25,7 +25,8 @@
     <div class="container">
         <header class="py-3 mb-1">
             <div class="row">
-                <div class="col-12 text-center"><a target="_blank" href="https://github.com/swirly/pythonexec.js"><i class="fab fa-github"></i> Voir sur Github </a></div>
+                <div class="col-12 text-center"><a target="_blank" href="https://github.com/swirly/pythonexec.js"><i
+                            class="fab fa-github"></i> Voir sur Github </a></div>
                 <div class="col-12 main-title"> Python par la pratique </div>
             </div>
         </header>
@@ -39,11 +40,11 @@
                         éxécuter Python dans le navigateur à partir de transpilage. Le code python est transformé en
                         Javascript grâce
                         la libraire Skulpt. Il est ensuite interprété par le navigateur.
-                        <p class="discours mb-0">
-                            L'ensemble est très léger. Une fois les quelques bibliothèques chargées, tout se passe dans
-                            le navigateur.
-                            Il n'y a donc pas de serveur à gérer, de charge serveur à anticiper.
-                        </p>
+                    <p class="discours mb-0">
+                        L'ensemble est très léger. Une fois les quelques bibliothèques chargées, tout se passe dans
+                        le navigateur.
+                        Il n'y a donc pas de serveur à gérer, de charge serveur à anticiper.
+                    </p>
                 </div>
             </div>
         </div>
@@ -77,6 +78,21 @@
                 </ol>
             </bloc-consigne>
 
+            <bloc-markdown>
+# Markdown
+## Utilisation du markdown 
+
+L'intégration de la bibliothèque javascript showdown permet de mettre des blocs de markdown
+
+ * qui sont convertis à la volée
+ * avec l'intégration transparente
+
+Celui ci est fait directement "en ligne"
+
+            </bloc-markdown>
+
+            <bloc-markdown data-file="assets/test.md"></bloc-markdown>
+
             <p> Tous les blocs peuvent contenir des éléments, ou bien ils peuvent importer les élèments à partir
                 d'un fichier en utilisant l'attribut <b>data-file</b>
             </p>
@@ -97,12 +113,12 @@
                 <li>Un dernier bouton pour le télécharger (pour éviter des copier/coller)</li>
             </ul>
             <p> Et il contient aussi une sortie pour la console et pour les graphismes.</p>
-  
-        <bloc-python >
-# Les lignes qui commencent par # sont des commentaires
-# Mettez ci dessous votre code              
-        </bloc-python>
-    </bloc-cours>
+
+            <bloc-python>
+                # Les lignes qui commencent par # sont des commentaires
+                # Mettez ci dessous votre code
+            </bloc-python>
+        </bloc-cours>
         <bloc-cours>
             <h4>Faire le résumé </h4>
             <p> Et enfin, il y a les bloc-retenir pour ce qui est à retenir.</p>
@@ -136,7 +152,7 @@
         </bloc-cours>
         <bloc-python data-python="python/turtle1.py">
         </bloc-python>
-        
+
     </main>
 </body>
 <!-- Font awesome-->
@@ -172,5 +188,8 @@
 <!-- FileSaver Library to be able to save code-->
 <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"
     integrity="sha256-u/J1Urdrk3nCYFefpoeTMgI5viU1ujCDu2fXXoSJjhg=" crossorigin="anonymous"></script>
+<!-- Showdown pour gérer le markdown-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
+    integrity="sha256-jl1+DOsSs9uABTKppOJ2GF8kXoc3XQzBtFFyS0i9Xoo=" crossorigin="anonymous"></script>
 
 </html>
