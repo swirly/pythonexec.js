@@ -163,6 +163,17 @@ bloc-python div[role='result'] {
   color: #252;
   font-family: 'Courier New', Courier, monospace; }
 
+bloc-python div[role='result'].pyexec-small {
+  min-height: 7.5rem; }
+
+bloc-python div[role='result'].pyexec-fixed {
+  height: 30rem;
+  overflow: auto; }
+
+bloc-python div[role='result'].pyexec-fixed.pyexec-small {
+  height: 7.5rem;
+  overflow: auto; }
+
 bloc-python div[role='graphic'] {
   border-radius: 10px;
   padding: 10px;
@@ -173,9 +184,15 @@ bloc-python div[role='graphic'] {
     padding: 0 !important;
     transform: scale(0.9); }
 
+bloc-python div[role='graphic'].pyexec-small {
+  min-height: 7.5rem; }
+
 bloc-python div[role='editor'] {
   margin-top: 0.3rem;
   min-height: 27.5rem; }
+
+bloc-python div.pyexec-small[role='editor'] {
+  min-height: 5rem; }
 
 bloc-python div.actions {
   text-align: right; }

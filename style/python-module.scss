@@ -254,6 +254,21 @@ bloc-python {
     font-family: 'Courier New', Courier, monospace;
   }
 
+  div[role='result'].pyexec-small {
+    min-height:7.5rem;
+  }
+
+  div[role='result'].pyexec-fixed {
+    height: 30rem;
+    overflow: auto;
+  }
+
+
+  div[role='result'].pyexec-fixed.pyexec-small {
+    height: 7.5rem;
+    overflow: auto;
+  }
+
   div[role='graphic'] {
     border-radius: 10px;
     padding: 10px;
@@ -268,11 +283,18 @@ bloc-python {
 
   }
 
+  div[role='graphic'].pyexec-small {
+    min-height: 7.5rem;
+  }
+
   div[role='editor'] {
     margin-top: 0.3rem;
     min-height: 27.5rem;
   }
 
+  div.pyexec-small[role='editor']{
+    min-height: 5rem;
+  }
   div.actions {
     text-align: right;
 

@@ -315,6 +315,22 @@ class PythonModule extends HTMLElement {
     } else {
       this.editor.setValue(this.datas.initialPython)
     }
+    if (this.hasAttribute('graphic-first')) {
+      this.pythondiv.classList.remove('show', 'active');
+      this.graphicdiv.classList.add('show', 'active');
+      this.consoleTab.classList.remove('active');
+      this.graphicTab.classList.add('active');
+    }
+
+    if (this.hasAttribute('small-editor')) {
+      this.pythondiv.classList.add('pyexec-small');
+      this.graphicdiv.classList.add('pyexec-small');
+      this.acediv.classList.add('pyexec-small');
+    }
+
+    if (this.hasAttribute('fixed-result')) {
+      this.pythondiv.classList.add('pyexec-fixed');
+    }
   }
 
 }
