@@ -9,16 +9,9 @@
     <meta name="keywords" content="Skulpt, Python, Javascript, Browser">
     <link href="style/favicon.ico" rel="icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-        integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css"
-        integrity="sha256-/d3ZZC6Gr1V8JDi9Os6A2CjemarhIv16pw1Q6snL+lM=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="style/python-module.css">
-    <link rel="import" href="templates/blocs.html">
-
-
+    <!--
+    <link rel="stylesheet" href="style/pythonexec.css">
+    -->
 </head>
 
 <body style="background-image: url('style/back.png')">
@@ -155,41 +148,12 @@ Celui ci est fait directement "en ligne"
 
     </main>
 </body>
-<!-- Font awesome-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-    integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-<!-- Bootstrap javascript -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+
+<!-- LABjs (load and block javascript) utilisé pour charger les bibliothèques -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/labjs/2.0.3/LAB.min.js" 
+    integrity="sha512-kbAlSEb5smG4AhoWpDe6DH+II2Z0rzX0YWMFgk8gIN5gw2xcAxPHRZ0Zn1dfhmKFFN+Vk64jteqDkQQOJvo0qg==" 
     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-<!-- Ace code editor -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"
-    integrity="sha256-C7DTYRJLG+B/VEzHGeoPMw699nsTQYPAXHKXZb+q04E=" crossorigin="anonymous"></script>
-<!-- Skulpt library for Python transpiling. No CDN yet
-<script src="https://skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
-<script src="https://skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
--->
-<!-- Skulpt version from trinket to have numpy and pyplot-->
-<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js"></script>
-<!-- Highlight JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"
-    integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"
-    integrity="sha256-HJNvOT759hq/HSbKUh+somD1QKrzFt94rkbwiQPR8Z0=" crossorigin="anonymous"></script>
-<!-- Python module script -->
+<!-- Python exec--> 
 <script src="js/pythonexec.js"></script>
-<!-- FileSaver Library to be able to save code-->
-<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"
-    integrity="sha256-u/J1Urdrk3nCYFefpoeTMgI5viU1ujCDu2fXXoSJjhg=" crossorigin="anonymous"></script>
-<!-- Showdown pour gérer le markdown-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"
-    integrity="sha256-jl1+DOsSs9uABTKppOJ2GF8kXoc3XQzBtFFyS0i9Xoo=" crossorigin="anonymous"></script>
 
 </html>

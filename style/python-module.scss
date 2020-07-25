@@ -1,9 +1,10 @@
-html{
+html {
   font-size: 14px;
 }
+
 body {
-  background: rgb(255,255,255);
-  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 50%, rgba(255,255,255,1) 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(228, 228, 228, 1) 50%, rgba(255, 255, 255, 1) 100%);
   counter-reset: cours-counter;
 
   h1,
@@ -29,7 +30,7 @@ body {
 
   }
 
-  div.discours{
+  div.discours {
     @media (min-width: 992px) {
       column-count: 2;
       column-gap: 2rem;
@@ -48,16 +49,20 @@ body {
     }
   }
 
-  div.cours,div.attention,div.retenir,div.consigne{
-    padding: 5px 15px; 
-    border-top:1px solid rgb(194, 195, 212);
-    border-bottom:1px solid rgb(194, 195, 212);
+  div.cours,
+  div.attention,
+  div.retenir,
+  div.consigne {
+    padding: 5px 15px;
+    border-top: 1px solid rgb(194, 195, 212);
+    border-bottom: 1px solid rgb(194, 195, 212);
   }
 
   div.cours {
     background-color: rgba(255, 255, 255, 0.945);
-    >h4::before{
-      content: counter(cours-counter)"." ;
+
+    >h4::before {
+      content: counter(cours-counter)".";
       counter-increment: cours-counter;
       font-family: "Playfair Display", Georgia, "Times New Roman", serif;
       font-size: 1.8rem;
@@ -66,39 +71,41 @@ body {
     }
   }
 
-  div.attention{
+  div.attention {
     background-color: #ffc5c5;
-    h5{
+
+    h5 {
       font-style: italic;
       text-align: right;
       padding-right: 2em;
       padding-bottom: 0.3em;
-      border-bottom:1px solid black;
+      border-bottom: 1px solid black;
     }
   }
 
-  div.retenir{   
+  div.retenir {
     background-color: #b6f0c7;
-    h5{
+
+    h5 {
       font-style: italic;
       text-align: right;
       padding-right: 2em;
       padding-bottom: 0.3em;
-      border-bottom:1px solid black;
+      border-bottom: 1px solid black;
     }
   }
 
-  div.consigne{
+  div.consigne {
     pre {
       margin-bottom: 0;
     }
 
-    h5{
+    h5 {
       font-style: italic;
       text-align: right;
       padding-right: 2em;
       padding-bottom: 0.3em;
-      border-bottom:1px solid black;
+      border-bottom: 1px solid black;
     }
 
     font-size: 16px;
@@ -255,7 +262,7 @@ bloc-python {
   }
 
   div[role='result'].pyexec-small {
-    min-height:7.5rem;
+    min-height: 7.5rem;
   }
 
   div[role='result'].pyexec-fixed {
@@ -277,8 +284,8 @@ bloc-python {
     background-color: #EEE;
 
     svg {
-      padding:0 !important;
-      transform:scale(0.9);
+      padding: 0 !important;
+      transform: scale(0.9);
     }
 
   }
@@ -292,9 +299,10 @@ bloc-python {
     min-height: 27.5rem;
   }
 
-  div.pyexec-small[role='editor']{
+  div.pyexec-small[role='editor'] {
     min-height: 5rem;
   }
+
   div.actions {
     text-align: right;
 
@@ -308,4 +316,66 @@ bloc-python {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     margin: auto;
   }
+}
+
+#loadingscreen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 9;
+
+  .charge {
+    font-size: large;
+    font-weight: bolder;
+    font-style: italic;
+    position: absolute;
+    top: 50%;
+    margin-top: 40px;
+    width:100%;
+    text-align: center;
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    left: 50%;
+    margin-left: -20px;
+    border-radius: 100%;
+    -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+    animation: sk-scaleout 1.0s infinite ease-in-out;
+  }
+
+  @-webkit-keyframes sk-scaleout {
+    0% {
+      -webkit-transform: scale(0)
+    }
+
+    100% {
+      -webkit-transform: scale(1.0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sk-scaleout {
+    0% {
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    }
+
+    100% {
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+      opacity: 0;
+    }
+  }
+}
+
+.hidden {
+  display: none !important;
 }

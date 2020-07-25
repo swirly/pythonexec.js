@@ -82,7 +82,7 @@ class MarkdownBlock extends blockModule {
       this.querySelectorAll('.markdown').forEach((block) => {
         console.log('bloc markdown trouvé');
         var converter = new showdown.Converter(),
-        html = converter.makeHtml(block.innerHTML);
+          html = converter.makeHtml(block.innerHTML);
         block.innerHTML = html;
       });
     });
@@ -183,12 +183,23 @@ class PythonModule extends HTMLElement {
           Sk.canvas = elt.graphicdiv.id;
           Sk.python3 = true;
           var SkFuture = {
-            print_function: true, division: true, absolute_import: null, unicode_literals: true,
+            print_function: true,
+            division: true,
+            absolute_import: null,
+            unicode_literals: true,
             // skulpt specific
-            set_repr: false, class_repr: false, inherit_from_object: false, super_args: false,
+            set_repr: false,
+            class_repr: false,
+            inherit_from_object: false,
+            super_args: false,
             // skulpt 1.11.32 specific
-            octal_number_literal: true, bankers_rounding: true, python_version: true,
-            dunder_next: true, dunder_round: true, exceptions: true, no_long_type: false,
+            octal_number_literal: true,
+            bankers_rounding: true,
+            python_version: true,
+            dunder_next: true,
+            dunder_round: true,
+            exceptions: true,
+            no_long_type: false,
             ceil_floor_int: true,
           };
           Sk.externalLibraries = {
@@ -209,7 +220,8 @@ class PythonModule extends HTMLElement {
             pygal: {
               path: 'https://cdn.jsdelivr.net/gh/trinketapp/pygal.js@0.1.4/__init__.js',
               dependencies: ['https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts.js',
-                'https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts-more.js']
+                'https://cdn.jsdelivr.net/gh/highcharts/highcharts-dist@6.0.7/highcharts-more.js'
+              ]
             },
             processing: {
               path: 'https://cdn.jsdelivr.net/gh/diraison/GenPyExo/external/processing/__init__.js',
@@ -231,9 +243,9 @@ class PythonModule extends HTMLElement {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
           });
           myPromise.then(function (mod) {
-            console.log('Python évalué avec succés');
-            elt.graphicdiv.style = ""; //pyplot block style incompatible with bootstrap tabs
-          },
+              console.log('Python évalué avec succés');
+              elt.graphicdiv.style = ""; //pyplot block style incompatible with bootstrap tabs
+            },
             function (err) {
               console.log(err.toString());
               console.log(document.getElementById('errorModal'));
@@ -274,7 +286,9 @@ class PythonModule extends HTMLElement {
     function myDownload(elt) {
       return function () {
         (function (elt) {
-          var blob = new Blob([elt.editor.getValue()], { type: "text/x-python;charset=utf-8" });
+          var blob = new Blob([elt.editor.getValue()], {
+            type: "text/x-python;charset=utf-8"
+          });
           saveAs(blob, "programme.py");
         }(elt));
       };
@@ -335,25 +349,45 @@ class PythonModule extends HTMLElement {
 
 }
 
-/* Chargement des templates */
-var httpRequest = new XMLHttpRequest();
-httpRequest.onreadystatechange = (function (xhr) {
-  return function (data) {
-    var DONE = 4; // readyState 4 means the request is done.
-    var OK = 200; // status 200 is a successful return.
-    if (xhr.readyState === DONE) {
-      if (xhr.status === OK) {
-        template = document.createElement('templates');
-        template.innerHTML = xhr.responseText;
-        document.getElementsByTagName('body')[0].prepend(template);
-        var event = new CustomEvent('templateLoaded');
-        document.dispatchEvent(event);
-      }
-    }
-  };
-}(httpRequest));
-httpRequest.open("GET", "templates/blocs.html");
-httpRequest.send();
+/* Chargement des CSS */
+var cssId = 'myCss'; // you could encode the css path itself to generate id..
+if (!document.getElementById(cssId)) {
+  var head = document.getElementsByTagName('head')[0];
+  var link = document.createElement('link');
+  link.id = cssId;
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'style/pythonexec.css';
+  link.media = 'all';
+  head.appendChild(link);
+}
+
+/* Adding loadingscreen */
+
+var loadingId = 'loadingscreen'; // you could encode the css path itself to generate id..
+if (!document.getElementById(loadingId)) {
+  var documentBody = document.getElementsByTagName('body')[0];
+
+  var loadDiv = document.createElement('div');
+  loadDiv.id = loadingId;
+  loadDiv.classList.add("loadingscreen");
+
+  var spinnerDiv = document.createElement('div');
+  spinnerDiv.classList.add("spinner");
+  loadDiv.appendChild(spinnerDiv);
+
+  var commentDiv = document.createElement('div');
+  commentDiv.classList.add("charge");
+  commentDiv.innerHTML = "Chargement de la page ...";
+  loadDiv.appendChild(commentDiv)
+
+  var first = documentBody.firstElementChild;
+  if (first === null) {
+    documentBody.appendChild(link);
+  } else {
+    documentBody.insertBefore(loadDiv, first);
+  }
+}
 
 /* Création du contenu des modules Python */
 document.addEventListener('templateLoaded', function (e) {
@@ -371,3 +405,38 @@ document.addEventListener('bloc-loaded', function (e) {
     hljs.highlightBlock(block);
   });
 });
+
+$LAB.script("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js")
+  .script("https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js")
+  .script("https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js")
+  .script("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js").wait()
+  .script("https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt.min.js").wait()
+  .script("https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js")
+  .script("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js").wait()
+  .script("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js")
+  .script("https://code.jquery.com/jquery-3.4.1.slim.min.js").wait()
+  .script("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js").wait()
+  .script("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
+  .wait(function () {
+
+    /* Chargement des templates */
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = (function (xhr) {
+      return function (data) {
+        var DONE = 4; // readyState 4 means the request is done.
+        var OK = 200; // status 200 is a successful return.
+        if (xhr.readyState === DONE) {
+          if (xhr.status === OK) {
+            template = document.createElement('templates');
+            template.innerHTML = xhr.responseText;
+            document.getElementsByTagName('body')[0].prepend(template);
+            var event = new CustomEvent('templateLoaded');
+            document.dispatchEvent(event);
+            document.getElementById("loadingscreen").classList.add("hidden");
+          }
+        }
+      };
+    }(httpRequest));
+    httpRequest.open("GET", "templates/blocs.html");
+    httpRequest.send();
+  });
