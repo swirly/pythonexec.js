@@ -1,37 +1,25 @@
-## Welcome to GitHub Pages
+# pythonexec.js
 
-You can use the [editor on GitHub](https://github.com/swirly/pythonexec.js/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## contexte
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+L'enseignement de NSI au lycée est orienté vers le langage Python. Les élèves doivent pouvoir s'approprier le langage dans un premier temps sans avoir à se soucier de l'environnement de développement (choix de l'éditeur, éxécution des programmes, etc).
 
-### Markdown
+La solution la plus simple est d'avoir un environnement qui permette d'utiliser Python dans le navigateur. Fournir le lien suffit alors pour que les élèves aient accès aux activités.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Il existe différentes solutions à l'heure actuelle pour fournir un environnement Python dans un navigateur. On peut en distinguer principalement deux sur le principe :
 
-```markdown
-Syntax highlighted code block
+* les solutions qui permettent de lancer un exécutable python sur un serveur et qui affiche le résultat en utilisant en général un kernel iPython. Dans cette famille de solution, on trouve en particulier les Jupyter Notebook. Ces solutions permettent d'avoir un environnement python complet. Elles ont par contre l'inconvénient de nécessiter la mise en place d'une infrastructure importante dont la gestion n'est pas toujours évidente.
 
-# Header 1
-## Header 2
-### Header 3
+* les solutions basées sur le transpilage. On convertit le langage Python vers javascript. Cette solution n'est pas toujours simple à mettre en oeuvre. Javascript est à la base un langage fonctionnel à prototype, là ou Python est un langage objet impératif. Cette différence de paradigme n'est pas anodine. Le [projet skulpt](https://skulpt.org/) est assez abouti sur le sujet. Il est en particulier utilisé par [trinket](https://trinket.io/)
 
-- Bulleted
-- List
+## Pourquoi pythonexec.js ?
 
-1. Numbered
-2. List
+Skulpt n'est pas toujours facile à mettre en œuvre. Pythonexec est juste une libraire qui est orientée vers l'enseignement et permet de mettre en œuvre facilement Skulpt, avec quelques ajouts en terme de style destinées spécifiquement à l'enseignement.
 
-**Bold** and _Italic_ and `Code` text
+### Installation
 
-[Link](url) and ![Image](src)
-```
+*todo*
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Création de pages
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/swirly/pythonexec.js/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+*todo*
