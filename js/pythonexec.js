@@ -362,32 +362,6 @@ if (!document.getElementById(cssId)) {
   head.appendChild(link);
 }
 
-/* Adding loadingscreen */
-
-var loadingId = 'loadingscreen'; // you could encode the css path itself to generate id..
-if (!document.getElementById(loadingId)) {
-  var documentBody = document.getElementsByTagName('body')[0];
-
-  var loadDiv = document.createElement('div');
-  loadDiv.id = loadingId;
-  loadDiv.classList.add("loadingscreen");
-
-  var spinnerDiv = document.createElement('div');
-  spinnerDiv.classList.add("spinner");
-  loadDiv.appendChild(spinnerDiv);
-
-  var commentDiv = document.createElement('div');
-  commentDiv.classList.add("charge");
-  commentDiv.innerHTML = "Chargement de la page ...";
-  loadDiv.appendChild(commentDiv)
-
-  var first = documentBody.firstElementChild;
-  if (first === null) {
-    documentBody.appendChild(link);
-  } else {
-    documentBody.insertBefore(loadDiv, first);
-  }
-}
 
 /* Création du contenu des modules Python */
 document.addEventListener('templateLoaded', function (e) {
@@ -432,7 +406,6 @@ $LAB.script("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.m
             document.getElementsByTagName('body')[0].prepend(template);
             var event = new CustomEvent('templateLoaded');
             document.dispatchEvent(event);
-            document.getElementById("loadingscreen").classList.add("hidden");
           }
         }
       };
