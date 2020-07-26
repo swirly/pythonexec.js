@@ -9,6 +9,13 @@
     <meta name="keywords" content="Skulpt, Python, Javascript, Browser">
     <link href="style/favicon.ico" rel="icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style/pythonexec.css">
+    <!-- LABjs (load and block javascript) utilisé pour charger les bibliothèques -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/labjs/2.0.3/LAB.min.js"
+        integrity="sha512-kbAlSEb5smG4AhoWpDe6DH+II2Z0rzX0YWMFgk8gIN5gw2xcAxPHRZ0Zn1dfhmKFFN+Vk64jteqDkQQOJvo0qg=="
+        crossorigin="anonymous"></script>
+    <!-- Python exec-->
+    <script src="js/pythonexec.js"></script>
 </head>
 
 <body style="background-image: url('style/back.png')">
@@ -30,11 +37,11 @@
                         éxécuter Python dans le navigateur à partir de transpilage. Le code python est transformé en
                         Javascript grâce
                         la libraire Skulpt. Il est ensuite interprété par le navigateur.
-                    <p class="discours mb-0">
-                        L'ensemble est très léger. Une fois les quelques bibliothèques chargées, tout se passe dans
-                        le navigateur.
-                        Il n'y a donc pas de serveur à gérer, de charge serveur à anticiper.
-                    </p>
+                        <p class="discours mb-0">
+                            L'ensemble est très léger. Une fois les quelques bibliothèques chargées, tout se passe dans
+                            le navigateur.
+                            Il n'y a donc pas de serveur à gérer, de charge serveur à anticiper.
+                        </p>
                 </div>
             </div>
         </div>
@@ -69,15 +76,15 @@
             </bloc-consigne>
 
             <bloc-markdown>
-# Markdown
-## Utilisation du markdown 
+                # Markdown
+                ## Utilisation du markdown
 
-L'intégration de la bibliothèque javascript showdown permet de mettre des blocs de markdown
+                L'intégration de la bibliothèque javascript showdown permet de mettre des blocs de markdown
 
- * qui sont convertis à la volée
- * avec l'intégration transparente
+                * qui sont convertis à la volée
+                * avec l'intégration transparente
 
-Celui ci est fait directement "en ligne"
+                Celui ci est fait directement "en ligne"
 
             </bloc-markdown>
 
@@ -105,8 +112,8 @@ Celui ci est fait directement "en ligne"
             <p> Et il contient aussi une sortie pour la console et pour les graphismes.</p>
 
             <bloc-python>
-# Les lignes qui commencent par # sont des commentaires
-# Mettez ci dessous votre code
+                # Les lignes qui commencent par # sont des commentaires
+                # Mettez ci dessous votre code
             </bloc-python>
         </bloc-cours>
         <bloc-cours>
@@ -145,12 +152,5 @@ Celui ci est fait directement "en ligne"
 
     </main>
 </body>
-
-<!-- LABjs (load and block javascript) utilisé pour charger les bibliothèques -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/labjs/2.0.3/LAB.min.js" 
-    integrity="sha512-kbAlSEb5smG4AhoWpDe6DH+II2Z0rzX0YWMFgk8gIN5gw2xcAxPHRZ0Zn1dfhmKFFN+Vk64jteqDkQQOJvo0qg==" 
-    crossorigin="anonymous"></script>
-<!-- Python exec--> 
-<script src="js/pythonexec.js"></script>
 
 </html>
