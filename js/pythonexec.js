@@ -395,6 +395,9 @@ $LAB.script("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.m
         }
       };
     }(httpRequest));
-    httpRequest.open("GET", "templates/blocs.html");
+    if (pythonexec_template_dir === undefined) {
+      pythonexec_template_dir = "templates";
+    }
+    httpRequest.open("GET", pythonexec_template_dir+"/blocs.html");
     httpRequest.send();
   });
