@@ -329,7 +329,7 @@ class PythonModule extends HTMLElement {
       httpRequest.open("GET", python);
       httpRequest.send();
     } else {
-      this.editor.setValue(this.datas.initialPython,1)
+      this.editor.setValue(this.datas.initialPython,1);
     }
     if (this.hasAttribute('graphic-first')) {
       this.pythondiv.classList.remove('show', 'active');
