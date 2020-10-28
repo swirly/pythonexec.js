@@ -70,7 +70,7 @@ class Retenir extends blockModule {
 class Info extends blockModule {
   constructor() {
     let titre = document.createElement('h5');
-    titre.innerHTML = '<i class="fas fa-lightbulb"></i> À retenir.';
+    titre.innerHTML = '<i class="fas fa-lightbulb"></i> Information.';
     super('info', titre);
   }
 }
