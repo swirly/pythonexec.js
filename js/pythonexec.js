@@ -67,6 +67,15 @@ class Retenir extends blockModule {
 }
 
 /* Elements custom */
+class Info extends blockModule {
+  constructor() {
+    let titre = document.createElement('h5');
+    titre.innerHTML = '<i class="fas fa-lightbulb"></i> À retenir.';
+    super('info', titre);
+  }
+}
+
+/* Elements custom */
 class Consigne extends blockModule {
   constructor() {
     let titre = document.createElement('h5');
@@ -357,6 +366,7 @@ document.addEventListener('templateLoaded', function (e) {
   customElements.define('bloc-attention', Attention);
   customElements.define('bloc-retenir', Retenir);
   customElements.define('bloc-consigne', Consigne);
+  customElements.define('bloc-info', Info);
   customElements.define('bloc-markdown', MarkdownBlock);
   customElements.define('bloc-python', PythonModule);
     event = new CustomEvent('bloc-loaded');

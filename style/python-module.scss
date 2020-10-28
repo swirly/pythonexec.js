@@ -52,7 +52,8 @@ body {
   div.cours,
   div.attention,
   div.retenir,
-  div.consigne {
+  div.consigne,
+  div.info {
     padding: 5px 15px;
     border-top: 1px solid rgb(194, 195, 212);
     border-bottom: 1px solid rgb(194, 195, 212);
@@ -74,18 +75,22 @@ body {
   div.attention {
     background-color: #ffc5c5;
 
-    h5 {
-      font-style: italic;
-      text-align: right;
-      padding-right: 2em;
-      padding-bottom: 0.3em;
-      border-bottom: 1px solid black;
-    }
+  }
+
+  div.attention {
+    background-color: #88c9ff;
+
   }
 
   div.retenir {
     background-color: #b6f0c7;
 
+  }
+
+  div.retenir, 
+  div.attention,
+  div.consigne,
+  div.info
     h5 {
       font-style: italic;
       text-align: right;
@@ -100,14 +105,6 @@ body {
       margin-bottom: 0;
     }
 
-    h5 {
-      font-style: italic;
-      text-align: right;
-      padding-right: 2em;
-      padding-bottom: 0.3em;
-      border-bottom: 1px solid black;
-    }
-
     font-size: 16px;
     color: #333;
     background: rgba(255, 255, 200, 0.75);
@@ -115,14 +112,10 @@ body {
     padding-top: 5px;
     //box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
-
-
     h4 {
       font-size: 1.5em;
       margin: 5px 0 5px 0;
     }
-
-
 
     h6 {
       font-size: 1em;
