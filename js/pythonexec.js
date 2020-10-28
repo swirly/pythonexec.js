@@ -86,8 +86,6 @@ class MarkdownBlock extends blockModule {
         block.innerHTML = html;
       });
     });
-    var event = new CustomEvent('bloc-loaded');
-    this.dispatchEvent(event);
   }
 }
 
@@ -229,15 +227,19 @@ class PythonModule extends HTMLElement {
             }
           };
 
-          Sk.configure({
-            output: pythonout(elt),
-            read: builtinRead,
-            __future__: SkFuture,
-            killableWhile: true,
-            killableFor: true,
-            //inputfun : null , // fonction d'entrée personnalisée, voir https://github.com/skulpt/skulpt/issues/685
-            //inputfunTakesPrompt:true
-          });
+            Sk.configure({
+		inputfun: function (prompt) {
+		    return window.prompt(prompt);
+		},
+		inputfunTakesPrompt: true,
+		output: pythonout(elt),
+		read: builtinRead,
+		__future__: SkFuture,
+		killableWhile: true,
+		killableFor: true,
+		//inputfun : null , // fonction d'entrée personnalisée, voir https://github.com/skulpt/skulpt/issues/685
+		//inputfunTakesPrompt:true
+            });
           (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = elt.graphicdiv;
           var myPromise = Sk.misceval.asyncToPromise(function () {
             return Sk.importMainWithBody("<stdin>", false, prog, true);
@@ -270,7 +272,7 @@ class PythonModule extends HTMLElement {
     function myRestore(elt) {
       return function () {
         (function (elt) {
-          elt.editor.setValue(elt.datas.savedPython);
+          elt.editor.setValue(elt.datas.savedPython,1);
         }(elt));
       };
     }
@@ -278,7 +280,7 @@ class PythonModule extends HTMLElement {
     function myReload(elt) {
       return function () {
         (function (elt) {
-          elt.editor.setValue(elt.datas.initialPython);
+          elt.editor.setValue(elt.datas.initialPython,1);
         }(elt));
       };
     }
@@ -319,7 +321,7 @@ class PythonModule extends HTMLElement {
           if (xhr.readyState === DONE) {
             if (xhr.status === OK) {
               elt.datas.initialPython = xhr.responseText;
-              elt.editor.setValue(elt.datas.initialPython);
+              elt.editor.setValue(elt.datas.initialPython,1);
             }
           }
         };
@@ -327,7 +329,7 @@ class PythonModule extends HTMLElement {
       httpRequest.open("GET", python);
       httpRequest.send();
     } else {
-      this.editor.setValue(this.datas.initialPython)
+      this.editor.setValue(this.datas.initialPython,1)
     }
     if (this.hasAttribute('graphic-first')) {
       this.pythondiv.classList.remove('show', 'active');
@@ -357,11 +359,15 @@ document.addEventListener('templateLoaded', function (e) {
   customElements.define('bloc-consigne', Consigne);
   customElements.define('bloc-markdown', MarkdownBlock);
   customElements.define('bloc-python', PythonModule);
+    event = new CustomEvent('bloc-loaded');
+    document.dispatchEvent(event);
+    
 });
 
 document.addEventListener('bloc-loaded', function (e) {
   document.querySelectorAll('pre code').forEach((block) => {
-    hljs.highlightBlock(block);
+      hljs.highlightBlock(block);
+      console.log('hljs');
   });
 });
 
@@ -373,6 +379,7 @@ $LAB.script("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.m
   .script("https://cdn.jsdelivr.net/gh/trinketapp/skulpt-dist@0.11.1.19/skulpt-stdlib.js")
   .script("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js").wait()
   .script("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js")
+  .script("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/shell.min.js")
   .script("https://code.jquery.com/jquery-3.4.1.slim.min.js").wait()
   .script("https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js").wait()
   .script("https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js")
@@ -400,4 +407,6 @@ $LAB.script("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.m
     }
     httpRequest.open("GET", pythonexec_template_dir+"/blocs.html");
     httpRequest.send();
+
+      
   });
