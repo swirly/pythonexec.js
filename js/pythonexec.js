@@ -129,7 +129,7 @@ class PythonModule extends HTMLElement {
     this.tododiv = this.querySelector('[role="consignes"]');
     this.acediv = this.querySelector('[role="editor"]');
     this.pythondiv = this.querySelector('[role="result"]');
-    this.pythonoutput = this.querySelector('[role="output"');
+    this.pythonoutput = this.querySelector('[role="output"]');
     console.log(this.pythonoutput);
     this.pythonoutput.id = this.id + "Console";
     console.log(this.pythonoutput.id);
